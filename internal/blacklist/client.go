@@ -1,4 +1,4 @@
-package fail2ban
+package blacklist
 
 import (
 	"encoding/json"
@@ -12,7 +12,7 @@ type BlacklistResponse struct {
 	BannedIPs []string `json:"blacklist"`
 }
 
-// GetBlacklist returns a pool of recently fail2ban IP's via json format
+// GetBlacklist returns a pool of recently blacklisted IP'
 func (b *BlacklistResponse) GetBlacklist(count int) ([]string, error) {
 	url := os.Getenv("API_ENDPOINT")
 	if url == "" {

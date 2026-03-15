@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/jim3/mazey/internal/fail2ban"
+	"github.com/jim3/mazey/internal/blacklist"
 	"github.com/spf13/cobra"
 )
 
@@ -23,13 +23,13 @@ var blacklistCmd = &cobra.Command{
 			count = parsedCount
 		}
 
-		client := &fail2ban.BlacklistResponse{}
+		client := &blacklist.BlacklistResponse{}
 		ipSlc, err := client.GetBlacklist(count)
 		if err != nil {
 			return err
 		}
 		for _, v := range ipSlc {
-			var resp fail2ban.IpLookUp
+			var resp blacklist.IpLookUp
 			err := resp.LookupIP(v)
 			if err != nil {
 				fmt.Fprintf(cmd.ErrOrStderr(), "IP lookup failed for %s: %v\n", v, err)
