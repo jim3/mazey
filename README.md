@@ -1,8 +1,5 @@
 # Mazey
 
- for threat triage.
-
-
 **Mazey** is an early-stage CLI reconnaissance tool for threat triage. It takes *inbound noise* such as automated scans, bots, misconfigured devices and enriches them using various threat intelligence API's like Virus Total, Shodan, etc...
 
 ## Why the name?
