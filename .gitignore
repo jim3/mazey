@@ -1,0 +1,26 @@
+# exclude all misc. notes in the files folder
+files/
+
+# exclude any env file
+.env
+.env.*
+!.env.example
+
+# exclude the .vscode folder
+.vscode/
+
+# build output
+mazey
+dist/
+bin/
+
+# logs / temp artifacts
+*.log
+*.out
+tmp/
+
+# test / coverage artifacts
+coverage.out
+
+# OS/editor junk
+.DS_Store
