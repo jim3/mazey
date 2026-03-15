@@ -29,7 +29,7 @@ cp .env.example .env
 Then set values in `.env`:
 
 ```env
-API_ENDPOINT=https://127.0.0.1:8000/blacklist
+API_ENDPOINT=http://localhost:8080/blacklist
 VT_API_KEY=replace-with-your-virustotal-api-key
 ```
 
