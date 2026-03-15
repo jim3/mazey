@@ -10,8 +10,7 @@ import (
 
 var blacklistCmd = &cobra.Command{
 	Use:   "blacklist [count]",
-	Short: "Fetch blacklisted IPs and show Shodan ports, CPEs, tags, and CVEs",
-	Long:  "Fetches blacklisted IPs from a JSON file and prints Shodan InternetDB details (ports, hostnames, CPEs, tags, vulnerabilities) for each IP.",
+	Short: "Fetches blacklisted IPs and and enriches them using various threat intelligence API's",
 	Args:  cobra.MaximumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		count := 10
