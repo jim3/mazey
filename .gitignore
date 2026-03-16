@@ -1,4 +1,4 @@
-# exclude all misc. notes in the files folder
+# exclude scripts folder
 scripts/
 
 # exclude any env file
