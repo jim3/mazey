@@ -10,7 +10,7 @@ import (
 )
 
 var ipreportCmd = &cobra.Command{
-	Use:   "ipreport [IP_ADDRESS]",
+	Use:   "ipreport <IP_ADDRESS>",
 	Short: "Get an IP address report",
 	Args:  cobra.MaximumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {

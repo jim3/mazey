@@ -10,7 +10,7 @@ import (
 
 // filereportCmd represents the filereport command
 var filereportCmd = &cobra.Command{
-	Use:   "filereport [HASH]",
+	Use:   "filereport <HASH>",
 	Short: "Retrieve information about a file",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		fmt.Println("filereport called")

@@ -9,7 +9,7 @@ import (
 )
 
 var blacklistCmd = &cobra.Command{
-	Use:   "blacklist [count]",
+	Use:   "blacklist [COUNT]",
 	Short: "Fetches blacklisted IPs and and enriches them using various threat intelligence API's",
 	Args:  cobra.MaximumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
