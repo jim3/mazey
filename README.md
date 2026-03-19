@@ -18,8 +18,8 @@ mazey <COMMAND> <ARGUMENT> [FLAGS]
 ## Commands
 
 - `blacklist [COUNT]` Get a pool of IPs from the blacklist API (default 10)
-- `ipreport [IP_ADDRESS]`  Get an IP address report
-- `filereport [FILE_HASH]` Get a file hash report
+- `ipreport <IP_ADDRESS>`  Get an IP address report
+- `filereport <FILE_HASH>` Get a file hash report
 - `help [COMMAND]` Show help for a command
 
 
