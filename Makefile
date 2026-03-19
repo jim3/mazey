@@ -15,14 +15,8 @@ run: ## Run the CLI (pass args with ARGS="...")
 clean: ## Remove built binary
 	rm -f $(APP_NAME)
 
-test: ## Run tests
-	$(GO) test ./...
-
 fmt: ## Format Go files
 	$(GO) fmt ./...
-
-vet: ## Run go vet
-	$(GO) vet ./...
 
 tidy: ## Sync and clean module dependencies
 	$(GO) mod tidy
