@@ -1,6 +1,3 @@
-# exclude scripts folder
-scripts/
-
 # exclude any env file
 .env
 .env.*
@@ -9,7 +6,6 @@ scripts/
 .vscode/
 
 # build output
-mazey
 dist/
 bin/
 
@@ -23,3 +19,6 @@ coverage.out
 
 # OS/editor junk
 .DS_Store
+
+# junk dir
+junk/

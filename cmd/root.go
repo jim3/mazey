@@ -14,7 +14,6 @@ var rootCmd = &cobra.Command{
 	Long: `Go Mazey Go! 🐈    
 **Mazey** is an early-stage CLI reconnaissance tool for threat triage. It takes *inbound noise* such as automated scans, bots, misconfigured devices and enriches them using various threat intelligence API's like Virus Total, Shodan, etc...`,
 	Example: `mazey blacklist 5
-mazey iplookup 1.1.1.1
 mazey ipreport 211.106.133.202
 mazey filereport 9b97edcbd8099796015c78bbf1723b35`,
 	RunE: func(cmd *cobra.Command, args []string) error {
