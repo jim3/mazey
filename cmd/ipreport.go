@@ -23,18 +23,15 @@ var ipreportCmd = &cobra.Command{
 		info := color.New(color.FgCyan)
 		dim := color.New(color.FgHiBlack).SprintFunc()
 
-		client := &ipreport.IpAddrReport{}
-		report, err := client.MergeReports(ipaddr, 3)
+		report, err := ipreport.MergeReports(ipaddr, 3)
 		if err != nil {
 			return err
 		}
 
 		divider := dim("------------------------------------------------------------")
-
 		fmt.Println(divider)
 		info.Printf("IP: %s\nASN: %d\nCountry: %s\nRep: %d\nNetwork: %s\n",
 			report.IP, report.ASN, report.Country, report.Reputation, report.Network)
-
 		fmt.Println(divider)
 		if report.Stats.Malicious > 0 {
 			danger.Printf("MALICIOUS:  %d\n", report.Stats.Malicious)
@@ -46,9 +43,7 @@ var ipreportCmd = &cobra.Command{
 		} else {
 			success.Println("✅ SUSPICIOUS:  0 (Clean)")
 		}
-
 		fmt.Println(divider)
-
 		info.Println("Recent domain names that have pointed to this IP:")
 		for _, v := range report.Resolutions {
 			info.Printf("- %s\n", v.HostName)

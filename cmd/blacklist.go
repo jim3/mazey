@@ -21,9 +21,7 @@ var blacklistCmd = &cobra.Command{
 			}
 			count = parsedCount
 		}
-
-		client := &blacklist.BlacklistResponse{}
-		ipSlc, err := client.GetBlacklist(count)
+		ipSlc, err := blacklist.GetBlacklist(count)
 		if err != nil {
 			return err
 		}

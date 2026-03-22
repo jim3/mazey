@@ -28,7 +28,8 @@ type FileReportError struct {
 }
 
 // GetFileReport fetches a file report from VirusTotal for the given hash.
-func (f FileReport) GetFileReport(hash string) (FileReport, error) {
+func GetFileReport(hash string) (FileReport, error) {
+	var f FileReport
 	if hash == "" {
 		return f, fmt.Errorf("hash cannot be empty")
 	}

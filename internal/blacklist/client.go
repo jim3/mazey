@@ -13,7 +13,8 @@ type BlacklistResponse struct {
 }
 
 // GetBlacklist returns a pool of recently blacklisted IP's
-func (b *BlacklistResponse) GetBlacklist(count int) ([]string, error) {
+func GetBlacklist(count int) ([]string, error) {
+	var b BlacklistResponse
 	url := os.Getenv("API_ENDPOINT")
 	if url == "" {
 		return nil, fmt.Errorf("API_ENDPOINT is not set")
@@ -29,15 +30,14 @@ func (b *BlacklistResponse) GetBlacklist(count int) ([]string, error) {
 		return nil, fmt.Errorf("blacklist API returned %d", res.StatusCode)
 	}
 
-	var br BlacklistResponse
-	if err := json.NewDecoder(res.Body).Decode(&br); err != nil {
+	if err := json.NewDecoder(res.Body).Decode(&b); err != nil {
 		return nil, fmt.Errorf("decode failed: %w", err)
 	}
 
-	if count > len(br.BannedIPs) {
-		count = len(br.BannedIPs)
+	if count > len(b.BannedIPs) {
+		count = len(b.BannedIPs)
 	}
-	return br.BannedIPs[:count], nil // field BannedIPs []string `json:"blacklist"`
+	return b.BannedIPs[:count], nil
 
 }
 
@@ -53,7 +53,8 @@ type IpLookUp struct {
 }
 
 // Fast IP Lookups for Open Ports and Vulnerabilities
-func (i *IpLookUp) LookupIP(ipAddr string) error {
+func LookupIP(ipAddr string) error {
+	var ip IpLookUp
 	URL := fmt.Sprintf("https://internetdb.shodan.io/%s", ipAddr)
 	res, err := http.Get(URL)
 	if err != nil {
@@ -66,7 +67,7 @@ func (i *IpLookUp) LookupIP(ipAddr string) error {
 		return fmt.Errorf("error reading HostInfo body: %v", err)
 	}
 
-	err = json.Unmarshal(body, i)
+	err = json.Unmarshal(body, &ip)
 	if err != nil {
 		return fmt.Errorf("error unmarshalling json data: %v", err)
 	}

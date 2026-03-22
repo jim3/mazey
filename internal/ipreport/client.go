@@ -8,7 +8,6 @@ import (
 	"time"
 )
 
-// Get an IP address report
 type IpAddrReport struct {
 	Data struct {
 		Attributes struct {
@@ -28,7 +27,9 @@ type IpAddrReport struct {
 	} `json:"data"`
 }
 
-func (ip IpAddrReport) GetIpReport(ipaddr string) (IpAddrReport, error) {
+// GetIpReport fetches an IP address report
+func GetIpReport(ipaddr string) (IpAddrReport, error) {
+	var ip IpAddrReport
 	if ipaddr == "" {
 		return ip, fmt.Errorf("ip address cannot be empty")
 	}
@@ -151,12 +152,12 @@ type FinalReport struct {
 	}
 }
 
-// Merge reports
-func (ip IpAddrReport) MergeReports(ipaddr string, limit int) (FinalReport, error) {
+// MergeReports combines the IP report and any associated domains into a single view.
+func MergeReports(ipaddr string, limit int) (FinalReport, error) {
 	var report FinalReport
 	report.IP = ipaddr
 
-	base, err := ip.GetIpReport(ipaddr)
+	base, err := GetIpReport(ipaddr)
 	if err != nil {
 		return report, err
 	}

@@ -22,12 +22,10 @@ var filereportCmd = &cobra.Command{
 		success := color.New(color.FgGreen)
 		label := color.New(color.FgHiBlack)
 
-		r := &filereport.FileReport{}
-		res, err := r.GetFileReport(filehash)
+		res, err := filereport.GetFileReport(filehash)
 		if err != nil {
 			return err
 		}
-
 		report := res.Data.Attributes
 
 		header.Printf("FILE REPORT FOR: %s\n", res.Data.Id)
