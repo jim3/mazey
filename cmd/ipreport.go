@@ -12,46 +12,49 @@ import (
 var ipreportCmd = &cobra.Command{
 	Use:   "ipreport <IP_ADDRESS>",
 	Short: "Get an IP address report",
-	Args:  cobra.MaximumNArgs(1),
+	Args:  cobra.ExactArgs(1),
+
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ipaddr := args[0]
-		// Setup color  palette
-		header := color.New(color.FgHiCyan).Add(color.Bold)
+
 		danger := color.New(color.FgRed).Add(color.Bold)
 		warning := color.New(color.FgYellow)
 		success := color.New(color.FgGreen)
-		label := color.New(color.FgHiBlack)
+		info := color.New(color.FgCyan)
+		dim := color.New(color.FgHiBlack).SprintFunc()
 
-		// API Call
-		report := &ipreport.IpAddrReport{}
-		res, err := report.GetIpReport(ipaddr)
+		client := &ipreport.IpAddrReport{}
+		report, err := client.MergeReports(ipaddr, 3)
 		if err != nil {
 			return err
 		}
 
-		stats := res.Data.Attributes.LastAnalysisStats
+		divider := dim("------------------------------------------------------------")
 
-		fmt.Println()
-		header.Printf("IP ADDRESS REPORT: %s\n", res.Data.Id)
-		label.Println(" --------------------------------------------------")
+		fmt.Println(divider)
+		info.Printf("IP: %s\nASN: %d\nCountry: %s\nRep: %d\nNetwork: %s\n",
+			report.IP, report.ASN, report.Country, report.Reputation, report.Network)
 
-		if stats.Malicious > 0 {
-			danger.Printf("MALICIOUS:  %d\n", stats.Malicious)
+		fmt.Println(divider)
+		if report.Stats.Malicious > 0 {
+			danger.Printf("MALICIOUS:  %d\n", report.Stats.Malicious)
 		} else {
-			success.Println(" ✅ MALICIOUS:  0 (Clean)")
+			success.Println("✅ MALICIOUS:  0 (Clean)")
+		}
+		if report.Stats.Suspicious > 0 {
+			warning.Printf("SUSPICIOUS: %d\n", report.Stats.Suspicious)
+		} else {
+			success.Println("✅ SUSPICIOUS:  0 (Clean)")
 		}
 
-		// Warning for Suspicious Hits
-		if stats.Suspicious > 0 {
-			warning.Printf("SUSPICIOUS: %d\n", stats.Suspicious)
+		fmt.Println(divider)
+
+		info.Println("Recent domain names that have pointed to this IP:")
+		for _, v := range report.Resolutions {
+			info.Printf("- %s\n", v.HostName)
 		}
+		fmt.Println(divider)
 
-		// Subtle details for the rest
-		label.Printf("  • Undetected: %d\n", stats.Undetected)
-		label.Printf("  • Harmless:   %d\n", stats.Harmless)
-		label.Printf("  • Timeout:    %d\n", stats.Timeout)
-
-		fmt.Println()
 		return nil
 	},
 }

@@ -27,23 +27,11 @@ var blacklistCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		for _, v := range ipSlc {
-			var resp blacklist.IpLookUp
-			err := resp.LookupIP(v)
-			if err != nil {
-				fmt.Fprintf(cmd.ErrOrStderr(), "IP lookup failed for %s: %v\n", v, err)
-				continue
-			}
-			fmt.Println("---------------------------------------------")
-			fmt.Println("Looking up blacklisted ip address: ", v)
-			fmt.Printf("CPEs: %v\n", resp.CPES)
-			fmt.Printf("Hostname: %v\n", resp.HostNames)
-			fmt.Printf("IP: %v\n", resp.IP)
-			fmt.Printf("Ports: %v\n", resp.Ports)
-			fmt.Printf("Tags: %v\n", resp.Tags)
-			fmt.Printf("Vulns: %v\n", resp.Vulns)
-			fmt.Println()
+
+		for i, v := range ipSlc {
+			fmt.Printf("Blacklist IP# %d %s\n", i, v)
 		}
+
 		return nil
 	},
 }

@@ -12,7 +12,7 @@ type BlacklistResponse struct {
 	BannedIPs []string `json:"blacklist"`
 }
 
-// GetBlacklist returns a pool of recently blacklisted IP'
+// GetBlacklist returns a pool of recently blacklisted IP's
 func (b *BlacklistResponse) GetBlacklist(count int) ([]string, error) {
 	url := os.Getenv("API_ENDPOINT")
 	if url == "" {
@@ -37,7 +37,7 @@ func (b *BlacklistResponse) GetBlacklist(count int) ([]string, error) {
 	if count > len(br.BannedIPs) {
 		count = len(br.BannedIPs)
 	}
-	return br.BannedIPs[:count], nil
+	return br.BannedIPs[:count], nil // field BannedIPs []string `json:"blacklist"`
 
 }
 

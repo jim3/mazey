@@ -1,13 +1,12 @@
+# notes
+notes/
+
 # exclude any env file
 .env
 .env.*
 
 # exclude the .vscode folder
 .vscode/
-
-# build output
-dist/
-bin/
 
 # logs / temp artifacts
 *.log
@@ -19,6 +18,3 @@ coverage.out
 
 # OS/editor junk
 .DS_Store
-
-# junk dir
-junk/

@@ -60,6 +60,11 @@ mazey filereport 9b97edcbd8099796015c78bbf1723b35
 
 ---
 
+### IP Report
+<br>
+
+![Mazey IP Report](assets/mazey-cli-ipreport.png)
+
 <br>
 <br>
 
